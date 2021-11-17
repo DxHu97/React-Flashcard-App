@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api/index";
+import FormComponent from "./FormComponent"
 
 function AddCard() {
   const [card, setCard] = useState({ front: "", back: "" });
@@ -24,13 +25,6 @@ function AddCard() {
     fetchData();
   }, [deckId]);
 
-  function change({ target }) {
-    setCard({
-      ...card,
-      [target.name]: target.value,
-    });
-  }
-
   async function submit(event) {
     event.preventDefault();
     const abortController = new AbortController();
@@ -42,6 +36,12 @@ function AddCard() {
     history.go(0);
     setCard({ front: "", back: "" });
     return response;
+  }
+  function change({ target }) {
+    setCard({
+      ...card,
+      [target.id]: target.value,
+    });
   }
 
   return (
@@ -61,41 +61,7 @@ function AddCard() {
           </li>
         </ol>
       </nav>
-      <form onSubmit={submit}>
-        <h2>{deck.name}: Add Card</h2>
-        <div className="form-group">
-        <label>Front</label>
-        <textarea
-          id="front"
-          name="front"
-          type="text"
-          onChange={change}
-          value={card.front}
-          className="form-control"
-        />
-        </div>
-        <div className="form-group">
-        <label>Back</label>
-        <textarea
-          id="back"
-          name="back"
-          type="text"
-          onChange={change}
-          value={card.back}
-          className="form-control"
-        />
-        </div>
-        <button
-          type="button"
-          class="btn btn-secondary mr-2"
-          onClick={() => history.push(`/decks/${deckId}`)}
-        >
-          Done
-        </button>
-        <button className="btn btn-primary mx-1" type="submit">
-          Save
-        </button>
-      </form>
+      <FormComponent submit = {submit} card = {card} change = {change} />
     </div>
   );
 }
