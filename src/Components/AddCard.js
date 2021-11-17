@@ -22,7 +22,7 @@ function AddCard() {
       };
     }
     fetchData();
-  }, []);
+  }, [deckId]);
 
   function change({ target }) {
     setCard({
@@ -44,10 +44,6 @@ function AddCard() {
     return response;
   }
 
-  async function handleDone() {
-    history.push(`/decks/${deckId}`);
-  }
-
   return (
     <div>
       <nav aria-label="breadcrumb">
@@ -67,6 +63,7 @@ function AddCard() {
       </nav>
       <form onSubmit={submit}>
         <h2>{deck.name}: Add Card</h2>
+        <div className="form-group">
         <label>Front</label>
         <textarea
           id="front"
@@ -76,6 +73,8 @@ function AddCard() {
           value={card.front}
           className="form-control"
         />
+        </div>
+        <div className="form-group">
         <label>Back</label>
         <textarea
           id="back"
@@ -85,6 +84,7 @@ function AddCard() {
           value={card.back}
           className="form-control"
         />
+        </div>
         <button
           type="button"
           class="btn btn-secondary mr-2"

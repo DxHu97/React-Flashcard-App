@@ -7,21 +7,9 @@ function Home() {
     const history = useHistory();
     const [decks, setDecks] = useState([]);
 
-    useEffect(()=> {
-        async function getData() {
-            const abortController = new AbortController();
-            try {
-                const response = await listDecks(abortController.signal);
-                setDecks(response)
-            } catch (error) {
-                console.error ("Error fetching data in home", error)
-            } 
-            return () => {
-                abortController.abort()
-            }
-        }
-        getData();
-    }, []); 
+    useEffect(() => {
+      listDecks().then(setDecks);
+    }, []);
 
 const deleteThisDeck = (deckId) => {
     const confirmDelete = window.confirm (

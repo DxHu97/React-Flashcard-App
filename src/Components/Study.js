@@ -21,7 +21,7 @@ function Study(){
             }
         }
         loadDeck();
-    }, [])
+    }, [deckId])
 
 function nextCard(index, total){
 if (index < total) {

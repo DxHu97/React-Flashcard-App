@@ -22,7 +22,7 @@ function EditDeck() {
         };
     }
     fetchData();
-}, []);
+}, [deckId]);
 
 async function submitInfo(event) {
     event.preventDefault();

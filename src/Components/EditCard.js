@@ -24,7 +24,7 @@ function EditCard() {
       };
     }
     fetchData();
-  }, []);
+  }, [cardId, deckId]);
 
   async function submit(event) {
     event.preventDefault();
@@ -61,6 +61,7 @@ function EditCard() {
       </nav>
       <form onSubmit={submit}>
         <h2>Edit Card</h2>
+        <div className="form-group">
         <label>Front</label>
         <textarea
           id="front"
@@ -70,6 +71,8 @@ function EditCard() {
           value={card.front}
           className="form-control"
         />
+        </div>
+        <div className="form-group">
         <label>Back</label>
         <textarea
           id="back"
@@ -79,6 +82,7 @@ function EditCard() {
           value={card.back}
           className="form-control"
         />
+        </div>
         <button
           type="button"
           class="btn btn-secondary mr-2"
